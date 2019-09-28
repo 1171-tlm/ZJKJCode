@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.ZjkjPlanMapper">
+    
+    <resultMap type="ZjkjPlan" id="ZjkjPlanResult">
+        <result property="planId"    column="plan_id"    />
+        <result property="planName"    column="plan_name"    />
+        <result property="cellType"    column="cell_type"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectZjkjPlanVo">
+        select plan_id, plan_name, cell_type, create_time, update_time from zjkj_plan
+    </sql>
+
+    <select id="selectZjkjPlanList" parameterType="ZjkjPlan" resultMap="ZjkjPlanResult">
+        <include refid="selectZjkjPlanVo"/>
+        <where>  
+            <if test="planName != null  and planName != ''"> and plan_name like concat('%', #{planName}, '%')</if>
+            <if test="cellType != null  and cellType != ''"> and cell_type = #{cellType}</if>
+            <if test="params.beginCreateTime != null and params.beginCreateTime != '' and params.endCreateTime != null and params.endCreateTime != ''"> and create_time between #{params.beginCreateTime} and #{params.endCreateTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectZjkjPlanById" parameterType="Long" resultMap="ZjkjPlanResult">
+        <include refid="selectZjkjPlanVo"/>
+        where plan_id = #{planId}
+    </select>
+        
+    <insert id="insertZjkjPlan" parameterType="ZjkjPlan" useGeneratedKeys="true" keyProperty="planId">
+        insert into zjkj_plan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="planName != null  and planName != ''">plan_name,</if>
+            <if test="cellType != null  and cellType != ''">cell_type,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="planName != null  and planName != ''">#{planName},</if>
+            <if test="cellType != null  and cellType != ''">#{cellType},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZjkjPlan" parameterType="ZjkjPlan">
+        update zjkj_plan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="planName != null  and planName != ''">plan_name = #{planName},</if>
+            <if test="cellType != null  and cellType != ''">cell_type = #{cellType},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where plan_id = #{planId}
+    </update>
+
+    <delete id="deleteZjkjPlanById" parameterType="Long">
+        delete from zjkj_plan where plan_id = #{planId}
+    </delete>
+
+    <delete id="deleteZjkjPlanByIds" parameterType="String">
+        delete from zjkj_plan where plan_id in 
+        <foreach item="planId" collection="array" open="(" separator="," close=")">
+            #{planId}
+        </foreach>
+    </delete>
+    
+</mapper>
