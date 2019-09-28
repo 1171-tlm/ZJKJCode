@@ -4,6 +4,7 @@ com\ruoyi\web\controller\system\SysProfileController.class
 com\ruoyi\web\controller\system\SysConfigController.class
 com\ruoyi\web\controller\tool\TestController.class
 com\ruoyi\web\controller\system\SysIndexController.class
+com\ruoyi\web\controller\system\ZjkjEqpController.class
 com\ruoyi\web\controller\demo\controller\DemoIconController.class
 com\ruoyi\web\controller\monitor\SysLogininforController.class
 com\ruoyi\web\controller\system\SysNoticeController.class
@@ -20,12 +21,14 @@ com\ruoyi\RuoYiApplication.class
 com\ruoyi\web\controller\demo\controller\DemoFormController.class
 com\ruoyi\web\controller\common\CommonController.class
 com\ruoyi\web\controller\system\SysMenuController.class
+com\ruoyi\web\controller\system\ZjkjHotelController.class
 com\ruoyi\RuoYiServletInitializer.class
 com\ruoyi\web\controller\tool\UserEntity.class
 com\ruoyi\web\controller\system\SysLoginController.class
 com\ruoyi\web\controller\demo\controller\DemoReportController.class
 com\ruoyi\web\controller\system\SysDictDataController.class
 com\ruoyi\web\controller\tool\SwaggerController.class
+com\ruoyi\web\controller\system\ZjkjPlanController.class
 com\ruoyi\web\controller\demo\controller\UserTableModel.class
 com\ruoyi\web\controller\demo\controller\UserFormModel.class
 com\ruoyi\web\core\config\SwaggerConfig.class
