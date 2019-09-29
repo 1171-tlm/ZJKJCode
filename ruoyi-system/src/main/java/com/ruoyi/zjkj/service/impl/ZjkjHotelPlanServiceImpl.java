@@ -1,11 +1,12 @@
-package com.ruoyi.system.service.impl;
+package com.ruoyi.zjkj.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.system.mapper.ZjkjHotelPlanMapper;
-import com.ruoyi.system.domain.ZjkjHotelPlan;
-import com.ruoyi.system.service.IZjkjHotelPlanService;
+
+import com.ruoyi.zjkj.domain.ZjkjHotelPlan;
+import com.ruoyi.zjkj.mapper.ZjkjHotelPlanMapper;
+import com.ruoyi.zjkj.service.IZjkjHotelPlanService;
 import com.ruoyi.common.core.text.Convert;
 
 /**

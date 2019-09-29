@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.zjkj.mapper.ZjkjProductMapper">
+    
+    <resultMap type="ZjkjProduct" id="ZjkjProductResult">
+        <result property="proId"    column="pro_id"    />
+        <result property="proName"    column="pro_name"    />
+        <result property="proNo"    column="pro_no"    />
+        <result property="stockPrice"    column="stock_price"    />
+        <result property="salePrice"    column="sale_price"    />
+        <result property="saleNum"    column="sale_num"    />
+        <result property="proType"    column="pro_type"    />
+        <result property="proImg"    column="pro_img"    />
+        <result property="proDesc"    column="pro_desc"    />
+        <result property="proDetail"    column="pro_detail"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectZjkjProductVo">
+        select pro_id, pro_name, pro_no, stock_price, sale_price, sale_num, pro_type, pro_img, pro_desc, pro_detail, create_time from zjkj_product
+    </sql>
+
+    <select id="selectZjkjProductList" parameterType="ZjkjProduct" resultMap="ZjkjProductResult">
+        <include refid="selectZjkjProductVo"/>
+        <where>  
+            <if test="proName != null  and proName != ''"> and pro_name like concat('%', #{proName}, '%')</if>
+            <if test="proType != null  and proType != ''"> and pro_type = #{proType}</if>
+            <if test="params.beginCreateTime != null and params.beginCreateTime != '' and params.endCreateTime != null and params.endCreateTime != ''"> and create_time between #{params.beginCreateTime} and #{params.endCreateTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectZjkjProductById" parameterType="Long" resultMap="ZjkjProductResult">
+        <include refid="selectZjkjProductVo"/>
+        where pro_id = #{proId}
+    </select>
+        
+    <insert id="insertZjkjProduct" parameterType="ZjkjProduct" useGeneratedKeys="true" keyProperty="proId">
+        insert into zjkj_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="proName != null  and proName != ''">pro_name,</if>
+            <if test="proNo != null ">pro_no,</if>
+            <if test="stockPrice != null ">stock_price,</if>
+            <if test="salePrice != null ">sale_price,</if>
+            <if test="saleNum != null ">sale_num,</if>
+            <if test="proType != null  and proType != ''">pro_type,</if>
+            <if test="proImg != null  and proImg != ''">pro_img,</if>
+            <if test="proDesc != null  and proDesc != ''">pro_desc,</if>
+            <if test="proDetail != null  and proDetail != ''">pro_detail,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="proName != null  and proName != ''">#{proName},</if>
+            <if test="proNo != null ">#{proNo},</if>
+            <if test="stockPrice != null ">#{stockPrice},</if>
+            <if test="salePrice != null ">#{salePrice},</if>
+            <if test="saleNum != null ">#{saleNum},</if>
+            <if test="proType != null  and proType != ''">#{proType},</if>
+            <if test="proImg != null  and proImg != ''">#{proImg},</if>
+            <if test="proDesc != null  and proDesc != ''">#{proDesc},</if>
+            <if test="proDetail != null  and proDetail != ''">#{proDetail},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZjkjProduct" parameterType="ZjkjProduct">
+        update zjkj_product
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="proName != null  and proName != ''">pro_name = #{proName},</if>
+            <if test="proNo != null ">pro_no = #{proNo},</if>
+            <if test="stockPrice != null ">stock_price = #{stockPrice},</if>
+            <if test="salePrice != null ">sale_price = #{salePrice},</if>
+            <if test="saleNum != null ">sale_num = #{saleNum},</if>
+            <if test="proType != null  and proType != ''">pro_type = #{proType},</if>
+            <if test="proImg != null  and proImg != ''">pro_img = #{proImg},</if>
+            <if test="proDesc != null  and proDesc != ''">pro_desc = #{proDesc},</if>
+            <if test="proDetail != null  and proDetail != ''">pro_detail = #{proDetail},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where pro_id = #{proId}
+    </update>
+
+    <delete id="deleteZjkjProductById" parameterType="Long">
+        delete from zjkj_product where pro_id = #{proId}
+    </delete>
+
+    <delete id="deleteZjkjProductByIds" parameterType="String">
+        delete from zjkj_product where pro_id in 
+        <foreach item="proId" collection="array" open="(" separator="," close=")">
+            #{proId}
+        </foreach>
+    </delete>
+    
+</mapper>

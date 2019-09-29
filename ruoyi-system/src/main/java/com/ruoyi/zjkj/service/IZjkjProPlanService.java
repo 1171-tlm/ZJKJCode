@@ -1,7 +1,8 @@
-package com.ruoyi.system.service;
+package com.ruoyi.zjkj.service;
 
-import com.ruoyi.system.domain.ZjkjProPlan;
 import java.util.List;
+
+import com.ruoyi.zjkj.domain.ZjkjProPlan;
 
 /**
  * 产品-方案关联Service接口

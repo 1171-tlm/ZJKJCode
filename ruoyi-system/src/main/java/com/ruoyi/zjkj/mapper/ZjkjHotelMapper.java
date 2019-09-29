@@ -1,7 +1,8 @@
-package com.ruoyi.system.mapper;
+package com.ruoyi.zjkj.mapper;
 
-import com.ruoyi.system.domain.ZjkjHotel;
 import java.util.List;
+
+import com.ruoyi.zjkj.domain.ZjkjHotel;
 
 /**
  * 酒店列表Mapper接口

@@ -1,7 +1,8 @@
-package com.ruoyi.system.mapper;
+package com.ruoyi.zjkj.mapper;
 
-import com.ruoyi.system.domain.ZjkjProPlan;
 import java.util.List;
+
+import com.ruoyi.zjkj.domain.ZjkjProPlan;
 
 /**
  * 产品-方案关联Mapper接口

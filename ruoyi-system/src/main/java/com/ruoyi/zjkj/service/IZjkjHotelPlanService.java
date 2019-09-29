@@ -1,7 +1,8 @@
-package com.ruoyi.system.service;
+package com.ruoyi.zjkj.service;
 
-import com.ruoyi.system.domain.ZjkjHotelPlan;
 import java.util.List;
+
+import com.ruoyi.zjkj.domain.ZjkjHotelPlan;
 
 /**
  * 酒店-产品方案关联Service接口

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.zjkj.mapper.ZjkjRotationMapper">
+    
+    <resultMap type="ZjkjRotation" id="ZjkjRotationResult">
+        <result property="id"    column="id"    />
+        <result property="rotaryPname"    column="rotary_pname"    />
+        <result property="title"    column="title"    />
+        <result property="carouselImg"    column="carousel_img"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectZjkjRotationVo">
+        select id, rotary_pname, title, carousel_img, create_time, remark from zjkj_rotation
+    </sql>
+
+    <select id="selectZjkjRotationList" parameterType="ZjkjRotation" resultMap="ZjkjRotationResult">
+        <include refid="selectZjkjRotationVo"/>
+        <where>  
+            <if test="rotaryPname != null  and rotaryPname != ''"> and rotary_pname like concat('%', #{rotaryPname}, '%')</if>
+            <if test="params.beginCreateTime != null and params.beginCreateTime != '' and params.endCreateTime != null and params.endCreateTime != ''"> and create_time between #{params.beginCreateTime} and #{params.endCreateTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectZjkjRotationById" parameterType="Long" resultMap="ZjkjRotationResult">
+        <include refid="selectZjkjRotationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertZjkjRotation" parameterType="ZjkjRotation">
+        insert into zjkj_rotation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null ">id,</if>
+            <if test="rotaryPname != null  and rotaryPname != ''">rotary_pname,</if>
+            <if test="title != null  and title != ''">title,</if>
+            <if test="carouselImg != null  and carouselImg != ''">carousel_img,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id},</if>
+            <if test="rotaryPname != null  and rotaryPname != ''">#{rotaryPname},</if>
+            <if test="title != null  and title != ''">#{title},</if>
+            <if test="carouselImg != null  and carouselImg != ''">#{carouselImg},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZjkjRotation" parameterType="ZjkjRotation">
+        update zjkj_rotation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="rotaryPname != null  and rotaryPname != ''">rotary_pname = #{rotaryPname},</if>
+            <if test="title != null  and title != ''">title = #{title},</if>
+            <if test="carouselImg != null  and carouselImg != ''">carousel_img = #{carouselImg},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteZjkjRotationById" parameterType="Long">
+        delete from zjkj_rotation where id = #{id}
+    </delete>
+
+    <delete id="deleteZjkjRotationByIds" parameterType="String">
+        delete from zjkj_rotation where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

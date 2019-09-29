@@ -1,7 +1,8 @@
-package com.ruoyi.system.service;
+package com.ruoyi.zjkj.service;
 
-import com.ruoyi.system.domain.ZjkjEqp;
 import java.util.List;
+
+import com.ruoyi.zjkj.domain.ZjkjEqp;
 
 /**
  * 设备信息Service接口

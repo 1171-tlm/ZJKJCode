@@ -1,4 +1,4 @@
-package com.ruoyi.web.controller.system;
+package com.ruoyi.web.controller.zjkj;
 
 import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.system.domain.ZjkjHotel;
-import com.ruoyi.system.service.IZjkjHotelService;
+import com.ruoyi.zjkj.domain.ZjkjHotel;
+import com.ruoyi.zjkj.service.IZjkjHotelService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -26,15 +26,15 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2019-09-27
  */
 @Controller
-@RequestMapping("/system/hotel")
+@RequestMapping("/zjkj/hotel")
 public class ZjkjHotelController extends BaseController
 {
-    private String prefix = "system/hotel";
+    private String prefix = "zjkj/hotel";
 
     @Autowired
     private IZjkjHotelService zjkjHotelService;
 
-    @RequiresPermissions("system:hotel:view")
+    @RequiresPermissions("zjkj:hotel:view")
     @GetMapping()
     public String hotel()
     {
@@ -44,7 +44,7 @@ public class ZjkjHotelController extends BaseController
     /**
      * 查询酒店列表列表
      */
-    @RequiresPermissions("system:hotel:list")
+    @RequiresPermissions("zjkj:hotel:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(ZjkjHotel zjkjHotel)
@@ -57,7 +57,7 @@ public class ZjkjHotelController extends BaseController
     /**
      * 导出酒店列表列表
      */
-    @RequiresPermissions("system:hotel:export")
+    @RequiresPermissions("zjkj:hotel:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(ZjkjHotel zjkjHotel)
@@ -79,7 +79,7 @@ public class ZjkjHotelController extends BaseController
     /**
      * 新增保存酒店列表
      */
-    @RequiresPermissions("system:hotel:add")
+    @RequiresPermissions("zjkj:hotel:add")
     @Log(title = "酒店列表", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -102,7 +102,7 @@ public class ZjkjHotelController extends BaseController
     /**
      * 修改保存酒店列表
      */
-    @RequiresPermissions("system:hotel:edit")
+    @RequiresPermissions("zjkj:hotel:edit")
     @Log(title = "酒店列表", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -114,7 +114,7 @@ public class ZjkjHotelController extends BaseController
     /**
      * 删除酒店列表
      */
-    @RequiresPermissions("system:hotel:remove")
+    @RequiresPermissions("zjkj:hotel:remove")
     @Log(title = "酒店列表", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody

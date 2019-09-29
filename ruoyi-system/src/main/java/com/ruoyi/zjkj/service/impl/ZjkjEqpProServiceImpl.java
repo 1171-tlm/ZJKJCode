@@ -1,11 +1,12 @@
-package com.ruoyi.system.service.impl;
+package com.ruoyi.zjkj.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.system.mapper.ZjkjEqpProMapper;
-import com.ruoyi.system.domain.ZjkjEqpPro;
-import com.ruoyi.system.service.IZjkjEqpProService;
+
+import com.ruoyi.zjkj.domain.ZjkjEqpPro;
+import com.ruoyi.zjkj.mapper.ZjkjEqpProMapper;
+import com.ruoyi.zjkj.service.IZjkjEqpProService;
 import com.ruoyi.common.core.text.Convert;
 
 /**

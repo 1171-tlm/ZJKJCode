@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.zjkj.mapper.ZjkjStockMapper">
+    
+    <resultMap type="ZjkjStock" id="ZjkjStockResult">
+        <result property="stockId"    column="stock_id"    />
+        <result property="hotelId"    column="hotel_id"    />
+        <result property="proId"    column="pro_id"    />
+        <result property="stockNum"    column="stock_num"    />
+        <result property="remark"    column="remark"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectZjkjStockVo">
+        select stock_id, hotel_id, pro_id, stock_num, remark, create_time, update_time from zjkj_stock
+    </sql>
+
+    <select id="selectZjkjStockList" parameterType="ZjkjStock" resultMap="ZjkjStockResult">
+        <include refid="selectZjkjStockVo"/>
+        <where>  
+            <if test="stockNum != null "> and stock_num = #{stockNum}</if>
+        </where>
+    </select>
+    
+    <select id="selectZjkjStockById" parameterType="Long" resultMap="ZjkjStockResult">
+        <include refid="selectZjkjStockVo"/>
+        where stock_id = #{stockId}
+    </select>
+        
+    <insert id="insertZjkjStock" parameterType="ZjkjStock" useGeneratedKeys="true" keyProperty="stockId">
+        insert into zjkj_stock
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hotelId != null ">hotel_id,</if>
+            <if test="proId != null ">pro_id,</if>
+            <if test="stockNum != null ">stock_num,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hotelId != null ">#{hotelId},</if>
+            <if test="proId != null ">#{proId},</if>
+            <if test="stockNum != null ">#{stockNum},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZjkjStock" parameterType="ZjkjStock">
+        update zjkj_stock
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hotelId != null ">hotel_id = #{hotelId},</if>
+            <if test="proId != null ">pro_id = #{proId},</if>
+            <if test="stockNum != null ">stock_num = #{stockNum},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where stock_id = #{stockId}
+    </update>
+
+    <delete id="deleteZjkjStockById" parameterType="Long">
+        delete from zjkj_stock where stock_id = #{stockId}
+    </delete>
+
+    <delete id="deleteZjkjStockByIds" parameterType="String">
+        delete from zjkj_stock where stock_id in 
+        <foreach item="stockId" collection="array" open="(" separator="," close=")">
+            #{stockId}
+        </foreach>
+    </delete>
+    
+</mapper>

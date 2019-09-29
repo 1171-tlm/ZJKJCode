@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.zjkj.mapper.ZjkjHotelEqpMapper">
+    
+    <resultMap type="ZjkjHotelEqp" id="ZjkjHotelEqpResult">
+        <result property="hotelId"    column="hotel_id"    />
+        <result property="eqpId"    column="eqp_id"    />
+    </resultMap>
+
+    <sql id="selectZjkjHotelEqpVo">
+        select hotel_id, eqp_id from zjkj_hotel_eqp
+    </sql>
+
+    <select id="selectZjkjHotelEqpList" parameterType="ZjkjHotelEqp" resultMap="ZjkjHotelEqpResult">
+        <include refid="selectZjkjHotelEqpVo"/>
+        <where>  
+        </where>
+    </select>
+    
+    <select id="selectZjkjHotelEqpById" parameterType="Long" resultMap="ZjkjHotelEqpResult">
+        <include refid="selectZjkjHotelEqpVo"/>
+        where hotel_id = #{hotelId}
+    </select>
+        
+    <insert id="insertZjkjHotelEqp" parameterType="ZjkjHotelEqp">
+        insert into zjkj_hotel_eqp
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hotelId != null ">hotel_id,</if>
+            <if test="eqpId != null ">eqp_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hotelId != null ">#{hotelId},</if>
+            <if test="eqpId != null ">#{eqpId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateZjkjHotelEqp" parameterType="ZjkjHotelEqp">
+        update zjkj_hotel_eqp
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="eqpId != null ">eqp_id = #{eqpId},</if>
+        </trim>
+        where hotel_id = #{hotelId}
+    </update>
+
+    <delete id="deleteZjkjHotelEqpById" parameterType="Long">
+        delete from zjkj_hotel_eqp where hotel_id = #{hotelId}
+    </delete>
+
+    <delete id="deleteZjkjHotelEqpByIds" parameterType="String">
+        delete from zjkj_hotel_eqp where hotel_id in 
+        <foreach item="hotelId" collection="array" open="(" separator="," close=")">
+            #{hotelId}
+        </foreach>
+    </delete>
+    
+</mapper>

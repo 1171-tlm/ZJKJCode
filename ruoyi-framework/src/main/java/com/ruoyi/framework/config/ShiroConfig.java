@@ -240,7 +240,7 @@ public class ShiroConfig
         // Shiro连接约束配置，即过滤链的定义
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         //设置不登录访问，不需要请注释下行代码
-        filterChainDefinitionMap.put("url", "anon");
+       // filterChainDefinitionMap.put("url", "anon");
         // 对静态资源设置匿名访问
         filterChainDefinitionMap.put("/favicon.ico**", "anon");
         filterChainDefinitionMap.put("/ruoyi.png**", "anon");

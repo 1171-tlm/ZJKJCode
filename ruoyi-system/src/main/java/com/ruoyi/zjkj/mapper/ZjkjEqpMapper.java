@@ -1,7 +1,8 @@
-package com.ruoyi.system.mapper;
+package com.ruoyi.zjkj.mapper;
 
-import com.ruoyi.system.domain.ZjkjEqp;
 import java.util.List;
+
+import com.ruoyi.zjkj.domain.ZjkjEqp;
 
 /**
  * 设备信息Mapper接口

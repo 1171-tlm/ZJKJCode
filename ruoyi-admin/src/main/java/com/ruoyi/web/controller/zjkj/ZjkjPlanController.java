@@ -1,4 +1,4 @@
-package com.ruoyi.web.controller.system;
+package com.ruoyi.web.controller.zjkj;
 
 import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.system.domain.ZjkjPlan;
-import com.ruoyi.system.service.IZjkjPlanService;
+import com.ruoyi.zjkj.domain.ZjkjPlan;
+import com.ruoyi.zjkj.service.IZjkjPlanService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -26,15 +26,15 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2019-09-28
  */
 @Controller
-@RequestMapping("/system/plan")
+@RequestMapping("/zjkj/plan") 
 public class ZjkjPlanController extends BaseController
 {
-    private String prefix = "system/plan";
+    private String prefix = "zjkj/plan";
 
     @Autowired
     private IZjkjPlanService zjkjPlanService;
 
-    @RequiresPermissions("system:plan:view")
+    @RequiresPermissions("zjkj:plan:view")
     @GetMapping()
     public String plan()
     {
@@ -44,7 +44,7 @@ public class ZjkjPlanController extends BaseController
     /**
      * 查询商品方案列表
      */
-    @RequiresPermissions("system:plan:list")
+    @RequiresPermissions("zjkj:plan:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(ZjkjPlan zjkjPlan)
@@ -57,7 +57,7 @@ public class ZjkjPlanController extends BaseController
     /**
      * 导出商品方案列表
      */
-    @RequiresPermissions("system:plan:export")
+    @RequiresPermissions("zjkj:plan:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(ZjkjPlan zjkjPlan)
@@ -79,7 +79,7 @@ public class ZjkjPlanController extends BaseController
     /**
      * 新增保存商品方案
      */
-    @RequiresPermissions("system:plan:add")
+    @RequiresPermissions("zjkj:plan:add")
     @Log(title = "商品方案", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -102,7 +102,7 @@ public class ZjkjPlanController extends BaseController
     /**
      * 修改保存商品方案
      */
-    @RequiresPermissions("system:plan:edit")
+    @RequiresPermissions("zjkj:plan:edit")
     @Log(title = "商品方案", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -114,7 +114,7 @@ public class ZjkjPlanController extends BaseController
     /**
      * 删除商品方案
      */
-    @RequiresPermissions("system:plan:remove")
+    @RequiresPermissions("zjkj:plan:remove")
     @Log(title = "商品方案", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody

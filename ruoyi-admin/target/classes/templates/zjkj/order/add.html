@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增订单管理')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-order-add">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">订单号：</label>
+                <div class="col-sm-8">
+                    <input name="orderNo" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">交易单号：</label>
+                <div class="col-sm-8">
+                    <input name="orderNum" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">商品ID：</label>
+                <div class="col-sm-8">
+                    <input name="proId" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">商品名称：</label>
+                <div class="col-sm-8">
+                    <textarea name="prodName" class="form-control" required></textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">订购酒店ID：</label>
+                <div class="col-sm-8">
+                    <input name="hotelId" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">酒店名称：</label>
+                <div class="col-sm-8">
+                    <input name="hotelName" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">房间号：</label>
+                <div class="col-sm-8">
+                    <input name="hotelRoom" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">设备号：</label>
+                <div class="col-sm-8">
+                    <input name="eqpNo" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">金额：</label>
+                <div class="col-sm-8">
+                    <input name="total" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">实付金额：</label>
+                <div class="col-sm-8">
+                    <input name="actualTotal" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">支付类型：</label>
+                <div class="col-sm-8">
+                    <select name="payType" class="form-control m-b">
+                        <option value="">所有</option>
+                    </select>
+                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">订单备注：</label>
+                <div class="col-sm-8">
+                    <textarea name="remarks" class="form-control"></textarea>
+                </div>
+            </div>
+             <div class="form-group">    
+                <label class="col-sm-3 control-label">支付状态：</label>
+                <div class="col-sm-8">
+                    <select name="status" class="form-control m-b" th:with="type=${@dict.getType('sys_order_status')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">订单商品总数：</label>
+                <div class="col-sm-8">
+                    <input name="productNums" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">完成时间 支付回调成功时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="finallyTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">是否已经支付，1：已经支付过，0：没有支付过：</label>
+                <div class="col-sm-8">
+                    <input name="isPayed" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">优惠总额：</label>
+                <div class="col-sm-8">
+                    <input name="reduceAmount" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "zjkj/order"
+        $("#form-order-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-order-add').serialize());
+            }
+        }
+
+        $("input[name='finallyTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>
